@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lpcardiointer-raphael-arantes-projects.vercel.app/sitemap.xml

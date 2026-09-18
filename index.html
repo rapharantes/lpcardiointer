@@ -4,8 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CardioInterv MaterDei · Hemodinâmica em Belo Horizonte</title>
-<meta name="description" content="Cateterismo, angioplastia, TAVI e outros procedimentos por cateter nas unidades Mater Dei de Belo Horizonte, Nova Lima e Betim-Contagem. Equipe CardioInterv, desde 2014.">
-<link rel="icon" href="assets/simbolo.png">
+<meta name="description" content="Hemodinâmica em Belo Horizonte: cateterismo, angioplastia, TAVI e 28 procedimentos por cateter nos hospitais Mater Dei. Equipe CardioInterv desde 2014.">
+<link rel="canonical" href="https://lpcardiointer-raphael-arantes-projects.vercel.app/">
+<meta name="theme-color" content="#0B0E63">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="CardioInterv MaterDei">
+<meta property="og:title" content="CardioInterv MaterDei · Hemodinâmica em Belo Horizonte">
+<meta property="og:description" content="Cateterismo, angioplastia, TAVI e outros procedimentos por cateter nos hospitais Mater Dei. Fale com a equipe pelo WhatsApp.">
+<meta property="og:url" content="https://lpcardiointer-raphael-arantes-projects.vercel.app/">
+<meta property="og:image" content="https://lpcardiointer-raphael-arantes-projects.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CardioInterv MaterDei: Tratamos o coração por dentro das artérias">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CardioInterv MaterDei · Hemodinâmica em Belo Horizonte">
+<meta name="twitter:description" content="Cateterismo, angioplastia, TAVI e outros procedimentos por cateter nos hospitais Mater Dei.">
+<meta name="twitter:image" content="https://lpcardiointer-raphael-arantes-projects.vercel.app/og-image.jpg">
+<link rel="preload" as="image" href="assets/hero-coracao-poster.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
@@ -384,6 +404,100 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
   .medicos .bgimg img{animation:drift linear both;animation-timeline:view();animation-range:entry 0% exit 100%;height:115%}
 }
 
+
+/* ===== v3: ajustes mobile, contraste, toque ===== */
+:root{--soft:#8A8E9B}
+.sala-fig img{height:auto}
+.card .tag,.doc .crm,.units small,.f-bottom{color:var(--muted)}
+.vid-toggle{width:44px;height:44px}
+.tab{padding:15px 18px}
+.f-grid ul{gap:0}
+.f-grid ul a{display:inline-flex;align-items:center;min-height:44px}
+/* menu */
+.mobile-menu .btn{font:600 13px/1 var(--body);letter-spacing:.08em;padding:18px 22px;border-bottom:0}
+.mobile-menu .menu-brand{position:absolute;top:18px;left:24px;display:flex;align-items:center;gap:10px;border:0;padding:0}
+.mobile-menu .menu-brand img:first-child{height:40px;width:auto}.mobile-menu .menu-brand img:last-child{height:30px;width:auto}
+/* hero mobile */
+.hero-lead{display:none}
+@media(max-width:1023px){
+  .hero-main{padding:44px 20px 28px}
+  .hero-eyebrow{margin-bottom:18px}
+  .hero h1{font-size:clamp(40px,11.5vw,56px)}
+  .hero-lead{display:block;margin-top:18px;font-size:17px;line-height:1.55;color:var(--grafite);max-width:34ch}
+  .hero-cta{margin-top:26px;flex-direction:column}
+  .hero-cta .btn{width:100%;justify-content:center;padding:18px 22px}
+  .hero-video{aspect-ratio:1/1}
+  .hero-video video{object-position:50% 20%}
+  .hero-side{padding:22px 20px}
+  .hero-side>p{display:none}
+  .units{margin-top:0;padding-top:0;border-top:0}
+  .units .marker{display:none}
+  .units ul{grid-template-columns:1fr 1fr;gap:10px 16px}
+  .units li{font-size:13px}
+  .units small{display:none}
+}
+/* carrosséis no celular */
+@media(max-width:899px){
+  .carousel{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:-24px;padding:0 24px 6px;scroll-padding-inline:24px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel>*{flex:0 0 86%;scroll-snap-align:start;animation:none!important}
+  .carousel .qcol{display:contents}
+  .carousel .q{margin:0;justify-content:flex-start}
+  .carousel .q footer{margin-top:auto}
+  .carousel .q.big blockquote{font-size:19px}
+  .carousel .q blockquote{font-size:16px}
+  .feat.carousel{margin-bottom:0}
+  .dots{display:flex;justify-content:center;gap:8px;margin:18px 0 0}
+  .dots button{width:24px;height:24px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer}
+  .dots button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--line);transition:background-color var(--dur-quick) var(--ease-out),scale var(--dur-quick) var(--ease-out)}
+  .dots button[aria-current="true"]::before{background:var(--navy);scale:1.25}
+  .feat-wrap{margin-bottom:56px}
+}
+@media(min-width:900px){.dots{display:none}}
+/* médicos: formação recolhida no celular */
+.bio summary{display:none}
+@media(max-width:1023px){
+  .bio summary{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14px;font-weight:600;color:var(--navy);cursor:pointer;list-style:none}
+  .bio summary::-webkit-details-marker{display:none}
+  .bio summary::after{content:"+";font-size:18px;line-height:1}
+  .bio[open] summary::after{content:"–"}
+  .doc{grid-template-columns:64px 1fr;gap:16px;padding:22px 0}
+  .doc img{width:64px;height:64px}
+}
+/* etapas e unidades compactas */
+@media(max-width:899px){
+  .step{display:grid;grid-template-columns:36px 1fr;padding:22px 0}
+  .step .n{grid-row:span 2;margin:4px 0 0}
+  .step h3{font-size:18px;margin-bottom:6px}
+  .timeline{grid-template-columns:1fr 1fr}
+  .unit{padding:20px 16px 22px 0}
+  .unit:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
+  .unit .yr{font-size:28px;margin-bottom:10px}
+  .unit h3{font-size:15px}
+  .unit p{font-size:13px}
+  .sec{padding:72px 0}
+  .sec-head{margin-bottom:36px}
+}
+/* legenda da curva */
+@media(max-width:520px){.curve-legend{flex-direction:column;gap:6px}}
+/* legendas das faixas de foto abaixo da imagem no celular */
+@media(max-width:699px){
+  .band{height:auto;background:#fff}
+  .band img{height:240px}
+  .team-band img{height:220px}
+  .band figcaption{position:static;border:0;border-top:1px solid var(--line);border-radius:0;background:#fff;padding:12px 20px;font-size:10px}
+}
+/* barra fixa de WhatsApp no celular */
+.wa-bar{display:none}
+@media(max-width:1023px){
+  .wa{display:none}
+  .wa-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:45;gap:10px;align-items:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);translate:0 110%;transition:translate var(--dur-slow) var(--ease-out)}
+  .wa-bar.show{translate:0 0}
+  .wa-bar .btn{flex:1;justify-content:center;padding:16px 18px}
+  .wa-bar .btn svg{width:18px;height:18px}
+  footer.site{padding-bottom:120px}
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .sr,.stagger>*,.band,.band img,.team-band img,.medicos .bgimg img{animation:none!important}
@@ -391,11 +505,215 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
   .curve .sweep{display:none}
 }
 </style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "MedicalOrganization",
+   "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#org",
+   "name": "CardioInterv MaterDei",
+   "alternateName": "CardioInterv",
+   "url": "https://lpcardiointer-raphael-arantes-projects.vercel.app/",
+   "logo": "https://lpcardiointer-raphael-arantes-projects.vercel.app/icon-512.png",
+   "image": "https://lpcardiointer-raphael-arantes-projects.vercel.app/og-image.jpg",
+   "description": "Equipe de hemodinâmica e cardiologia intervencionista que atende nos hospitais da Rede Mater Dei em Belo Horizonte, Nova Lima e Betim-Contagem desde 2014.",
+   "medicalSpecialty": "Cardiovascular",
+   "foundingDate": "2014",
+   "telephone": "+55-31-97136-4667",
+   "email": "admcardiointerv@gmail.com",
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. do Contorno, 9000",
+    "addressLocality": "Belo Horizonte",
+    "addressRegion": "MG",
+    "postalCode": "30110-062",
+    "addressCountry": "BR"
+   },
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Belo Horizonte"
+    },
+    {
+     "@type": "City",
+     "name": "Nova Lima"
+    },
+    {
+     "@type": "City",
+     "name": "Betim"
+    },
+    {
+     "@type": "City",
+     "name": "Contagem"
+    }
+   ],
+   "sameAs": [
+    "https://www.instagram.com/cardiointervmaterdei/",
+    "https://www.facebook.com/CardioIntervMaterDei"
+   ],
+   "availableService": [
+    {
+     "@type": "MedicalProcedure",
+     "name": "Coronariografia (cateterismo cardíaco)"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Angioplastia coronária com stent"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Implante transcateter de valva aórtica (TAVI)"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Avaliação fisiológica (FFR, iFR, RFR)"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Imagem intravascular (IVUS e OCT)"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Oclusão de CIA, CIV e forame oval patente"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Oclusão do apêndice atrial esquerdo"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Valvoplastia por balão"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Angioplastia de vasos periféricos"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Embolização de mioma"
+    },
+    {
+     "@type": "MedicalProcedure",
+     "name": "Embolização de próstata"
+    }
+   ],
+   "employee": [
+    {
+     "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#lucas"
+    },
+    {
+     "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#guilherme"
+    },
+    {
+     "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#fernando"
+    }
+   ]
+  },
+  {
+   "@type": "Physician",
+   "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#lucas",
+   "name": "Dr. Lucas Lodi Junqueira",
+   "medicalSpecialty": "Cardiovascular",
+   "identifier": "CRM-MG 36986",
+   "jobTitle": "Coordenador do Serviço de Cardiologia Intervencionista da Rede Mater Dei",
+   "image": "https://lpcardiointer-raphael-arantes-projects.vercel.app/assets/lucas.webp",
+   "alumniOf": "Universidade Federal de Minas Gerais",
+   "worksFor": {
+    "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#org"
+   }
+  },
+  {
+   "@type": "Physician",
+   "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#guilherme",
+   "name": "Dr. Guilherme Athayde",
+   "medicalSpecialty": "Cardiovascular",
+   "identifier": "CRM-MG 44774",
+   "jobTitle": "Coordenador do Serviço de Cardiologia Intervencionista da Rede Mater Dei",
+   "image": "https://lpcardiointer-raphael-arantes-projects.vercel.app/assets/guilherme.webp",
+   "alumniOf": "Universidade Federal de Minas Gerais",
+   "worksFor": {
+    "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#org"
+   }
+  },
+  {
+   "@type": "Physician",
+   "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#fernando",
+   "name": "Dr. Fernando Gusmão",
+   "medicalSpecialty": "Cardiovascular",
+   "identifier": "CRM-MG 41357",
+   "jobTitle": "Hemodinamicista",
+   "image": "https://lpcardiointer-raphael-arantes-projects.vercel.app/assets/fernando.webp",
+   "worksFor": {
+    "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#org"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#page",
+   "url": "https://lpcardiointer-raphael-arantes-projects.vercel.app/",
+   "name": "CardioInterv MaterDei · Hemodinâmica em Belo Horizonte",
+   "inLanguage": "pt-BR",
+   "about": {
+    "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#org"
+   },
+   "dateModified": "2026-09-18"
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://lpcardiointer-raphael-arantes-projects.vercel.app/#faq",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Qual a diferença entre cateterismo e angioplastia?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "O cateterismo é o exame: mostra onde estão as obstruções nas artérias do coração. A angioplastia é o tratamento: abre a artéria com um balão e, na maioria das vezes, deixa um stent no lugar. Quando o cateterismo encontra uma obstrução que precisa ser tratada, os dois podem acontecer no mesmo procedimento."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "O exame é feito pelo braço ou pela virilha?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sempre que possível, pelo punho (artéria radial). Essa via tem menos risco de sangramento. Em alguns casos, como na TAVI, a virilha é necessária por causa do tamanho do material."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Posso marcar à noite ou no fim de semana?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sim. Exames eletivos podem ser agendados fora do horário comercial, combinando com você e com o seu cardiologista."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "E a radiação?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "O angiógrafo da sala híbrida é um Philips Allura FlexMove FD20 com a tecnologia Clarity, que reduz em até 73% a dose de radiação recebida pelo paciente."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quem me explica o preparo?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Um dos médicos da equipe, os mesmos que fazem o procedimento. Mande uma mensagem pelo WhatsApp e a gente combina o melhor horário para conversar."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <div class="mobile-menu" id="menu" aria-hidden="true">
+  <a class="menu-brand" href="#" aria-label="CardioInterv MaterDei, início"><img src="assets/simbolo.png" alt="" width="234" height="240"><img src="assets/wordmark.png" alt="" width="520" height="129"></a>
   <button class="menu-btn close" id="menu-close" aria-label="Fechar menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <a href="#sala">Sala híbrida</a>
   <a href="#procedimentos">Procedimentos</a>
@@ -437,6 +755,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
       <span class="l2 rv d2">por dentro</span>
       <span class="l3 rv d3">das artérias.</span>
     </h1>
+    <p class="hero-lead fd d3">Cateterismo, angioplastia, TAVI e outros procedimentos por cateter nos hospitais Mater Dei de Belo Horizonte. Desde 2014.</p>
     <div class="hero-cta fd d4">
       <a class="btn btn-red" data-wa="paciente" href="https://wa.me/5531971364667">Falar com a equipe
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -543,7 +862,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
       <p>Fazemos 28 procedimentos diferentes, de exames diagnósticos a tratamentos que antes exigiam abrir o tórax. Estes três são os que mais nos procuram.</p>
     </div>
 
-    <div class="feat stagger">
+    <div class="feat-wrap"><div class="feat stagger carousel" data-carousel aria-label="Procedimentos mais procurados">
       <article class="card">
         <div class="shot"><img src="assets/card-cateterismo.webp" alt="Monitor da sala de comando mostrando a imagem das artérias coronárias com contraste" width="900" height="723" loading="lazy"></div>
         <div class="body">
@@ -571,7 +890,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
         <span class="tag">Implante transcateter de valva aórtica</span>
         </div>
       </article>
-    </div>
+    </div></div>
 
     <div class="tabs" role="tablist" aria-label="Procedimentos por grupo">
       <button class="tab" role="tab" id="t-diag" aria-controls="p-diag" aria-selected="true">Diagnóstico<small>10</small></button>
@@ -662,19 +981,19 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
           <img src="assets/lucas.webp" alt="" width="300" height="300" loading="lazy">
           <div><h3>Dr. Lucas Lodi Junqueira</h3><span class="crm">CRM-MG 36986</span>
             <p class="role">Coordenador do Serviço de Cardiologia Intervencionista da Rede Mater Dei</p>
-            <p>Mestre e doutor pela Faculdade de Medicina da UFMG. Coordenou a hemodinâmica do Hospital das Clínicas da UFMG de 2008 a 2024. Revisor de revistas como Heart e Catheterization and Cardiovascular Interventions.</p></div>
+            <details class="bio" open><summary>Ver formação</summary><p>Mestre e doutor pela Faculdade de Medicina da UFMG. Coordenou a hemodinâmica do Hospital das Clínicas da UFMG de 2008 a 2024. Revisor de revistas como Heart e Catheterization and Cardiovascular Interventions.</p></details></div>
         </article>
         <article class="doc">
           <img src="assets/guilherme.webp" alt="" width="300" height="300" loading="lazy">
           <div><h3>Dr. Guilherme Athayde</h3><span class="crm">CRM-MG 44774</span>
             <p class="role">Coordenador do Serviço de Cardiologia Intervencionista da Rede Mater Dei</p>
-            <p>Mestre e doutor pela Faculdade de Medicina da UFMG, onde é pesquisador. Preceptor das residências de cardiologia do HC-UFMG e do Mater Dei. Especialista em hemodinâmica pela SBHCI.</p></div>
+            <details class="bio" open><summary>Ver formação</summary><p>Mestre e doutor pela Faculdade de Medicina da UFMG, onde é pesquisador. Preceptor das residências de cardiologia do HC-UFMG e do Mater Dei. Especialista em hemodinâmica pela SBHCI.</p></details></div>
         </article>
         <article class="doc">
           <img src="assets/fernando.webp" alt="" width="300" height="300" loading="lazy">
           <div><h3>Dr. Fernando Gusmão</h3><span class="crm">CRM-MG 41357</span>
             <p class="role">Hemodinamicista</p>
-            <p>Formado pela UNIFAC Barbacena. Especialização em cardiologia e em hemodinâmica e cardiologia intervencionista no Hospital Felício Rocho. Membro da Sociedade Brasileira de Cardiologia.</p></div>
+            <details class="bio" open><summary>Ver formação</summary><p>Formado pela UNIFAC Barbacena. Especialização em cardiologia e em hemodinâmica e cardiologia intervencionista no Hospital Felício Rocho. Membro da Sociedade Brasileira de Cardiologia.</p></details></div>
         </article>
       </div>
     </div>
@@ -689,7 +1008,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
       <h2>O que ficou <span class="dim">depois do exame.</span></h2>
       <p>Trechos da pesquisa de satisfação que o paciente responde depois do procedimento.</p>
     </div>
-    <div class="quotes stagger">
+    <div class="quotes stagger carousel" data-carousel aria-label="Depoimentos de pacientes">
       <figure class="q big" style="margin:0">
         <div class="q-shot"><img src="assets/sala-angulo.webp" alt="Sala híbrida do Mater Dei Contorno vista de outro ângulo" width="705" height="469" loading="lazy"></div>
         <blockquote>Em cada etapa, pude sentir o cuidado e a dedicação de todos. A estrutura é excelente, mas, acima de tudo, o que mais me marcou foi o atendimento humano e o carinho de cada profissional.</blockquote>
@@ -807,6 +1126,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
   </div>
 </footer>
 
+<div class="wa-bar" id="wa-bar" aria-hidden="true"><a class="btn btn-red" data-wa="paciente" href="https://wa.me/5531971364667" tabindex="-1"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2z"/></svg>Falar com a equipe no WhatsApp</a></div>
 <a class="wa" data-wa="paciente" href="https://wa.me/5531971364667" aria-label="Falar pelo WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.3a.4.4 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.3 2.2 2.2 0 00.2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
 </a>
@@ -835,6 +1155,30 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.
   function set(paused){ if(paused){ v.pause(); } else { var p=v.play(); if(p&&p.catch) p.catch(function(){}); } b.setAttribute('aria-pressed',paused); b.setAttribute('aria-label',paused?'Tocar vídeo':'Pausar vídeo'); }
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){ v.removeAttribute('autoplay'); set(true); }
   b.addEventListener('click',function(){ set(!v.paused); });
+})();
+// Barra fixa de WhatsApp: aparece depois do hero e some perto do CTA final
+(function(){
+  var bar=document.getElementById('wa-bar'); if(!bar||!('IntersectionObserver' in window)) return;
+  var link=bar.querySelector('a'), heroIn=true, endIn=false;
+  function upd(){ var on=!heroIn&&!endIn; bar.classList.toggle('show',on); bar.setAttribute('aria-hidden',!on); link.tabIndex=on?0:-1; }
+  new IntersectionObserver(function(e){ heroIn=e[0].isIntersecting; upd(); }).observe(document.querySelector('.hero'));
+  new IntersectionObserver(function(e){ endIn=e[0].isIntersecting; upd(); }).observe(document.getElementById('contato'));
+})();
+// Carrosséis no celular: pontos de posição
+document.querySelectorAll('[data-carousel]').forEach(function(c){
+  var items=Array.prototype.filter.call(c.querySelectorAll(':scope > *, :scope > .qcol > *'),function(el){ return !el.classList.contains('qcol'); });
+  var dots=document.createElement('div'); dots.className='dots'; dots.setAttribute('role','group'); dots.setAttribute('aria-label','Posição');
+  items.forEach(function(it,i){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Item '+(i+1)+' de '+items.length); b.setAttribute('aria-current',i===0);
+    b.addEventListener('click',function(){ c.scrollTo({left:it.offsetLeft-c.offsetLeft-24,behavior:'smooth'}); }); dots.appendChild(b); });
+  c.insertAdjacentElement('afterend',dots);
+  var bs=dots.children;
+  c.addEventListener('scroll',function(){ var x=c.scrollLeft, best=0, d=1e9; items.forEach(function(it,i){ var dd=Math.abs(it.offsetLeft-c.offsetLeft-24-x); if(dd<d){d=dd;best=i;} }); for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-current',i===best); },{passive:true});
+});
+// Formação dos médicos: recolhida no celular, aberta no desktop
+(function(){
+  var mq=matchMedia('(max-width:1023px)');
+  function set(){ document.querySelectorAll('.bio').forEach(function(d){ d.open=!mq.matches; }); }
+  set(); mq.addEventListener('change',set);
 })();
 // Abas de procedimentos
 var tabs = Array.prototype.slice.call(document.querySelectorAll('[role=tab]'));
