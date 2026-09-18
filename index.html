@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CardioInterv MaterDei · Hemodinâmica em Belo Horizonte</title>
+<meta name="description" content="Cateterismo, angioplastia, TAVI e outros procedimentos por cateter nas unidades Mater Dei de Belo Horizonte, Nova Lima e Betim-Contagem. Equipe CardioInterv, desde 2014.">
+<link rel="icon" href="assets/simbolo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B0E63; --navy-900:#070940; --navy-50:#EEF0FA;
+  --carmim:#CE0000; --carmim-700:#A30000; --carmim-50:#FCEDED;
+  --grafite:#4B4E55; --ink:#15172E; --muted:#6B6F7B; --soft:#A2A6B3;
+  --line:#E6E8EF; --mist:#F6F7FA; --paper:#FFFFFF;
+  --gx-1:6%; --gx-2:28%; --gx-3:66%; --gx-4:94%;
+  --dur-quick:180ms; --dur-base:280ms; --dur-slow:420ms; --dur-page:900ms;
+  --ease-out:cubic-bezier(.16,1,.3,1); --ease-in:cubic-bezier(.55,0,1,.45); --ease-inout:cubic-bezier(.76,0,.24,1);
+  --display:'Plus Jakarta Sans',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;interpolate-size:allow-keywords;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);letter-spacing:-.025em;word-spacing:.06em;margin:0;font-weight:600;line-height:1.05}
+p{margin:0}
+::selection{background:var(--carmim-50);color:var(--carmim-700)}
+:focus-visible{outline:2px solid var(--carmim);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1600px;margin:0 auto;padding:0 24px}
+@media(min-width:1024px){.wrap{padding:0 var(--gx-1)}}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:16px;z-index:100;background:#fff;padding:8px 12px}
+
+/* grid lines (design system) */
+.gl{position:absolute;inset:0;pointer-events:none;display:none;z-index:0}
+@media(min-width:1024px){.gl{display:block}}
+.gl i{position:absolute;top:0;bottom:0;width:1px;background:rgba(11,14,99,.06)}
+.marker{position:absolute;width:5px;height:5px;background:var(--navy);z-index:3}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:12px;font:600 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:3px;padding:16px 22px;transition:background-color var(--dur-quick) var(--ease-out),color var(--dur-quick) var(--ease-out),border-color var(--dur-quick) var(--ease-out)}
+.btn svg{width:16px;height:16px;transition:translate var(--dur-base) var(--ease-out)}
+.btn:hover svg{translate:3px 0}
+.btn-red{background:var(--carmim);color:#fff}.btn-red:hover{background:var(--carmim-700)}
+.btn-navy{background:var(--navy);color:#fff}.btn-navy:hover{background:var(--navy-900)}
+.btn-line{border:1px solid var(--line);color:var(--ink);background:#fff}.btn-line:hover{border-color:var(--navy);color:var(--navy)}
+.btn-white{background:#fff;color:var(--navy)}.btn-white:hover{background:var(--navy-50)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+@media(min-width:1024px){.nav{height:92px;padding:0 var(--gx-1)}}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img.sym{height:40px;width:auto}
+.brand img.wm{height:30px;width:auto}
+@media(min-width:1024px){.brand img.sym{height:48px}.brand img.wm{height:36px}}
+.nav-links{display:none;gap:30px;font-size:14px;font-weight:500;color:var(--muted)}
+.nav-links a{text-decoration:none;transition:color var(--dur-quick) var(--ease-out)}
+.nav-links a:hover{color:var(--navy)}
+@media(min-width:1100px){.nav-links{display:flex}}
+.nav .btn{padding:12px 16px;display:none}
+@media(min-width:720px){.nav .btn{display:inline-flex}}
+.menu-btn{background:none;border:0;padding:8px;color:var(--ink);cursor:pointer}
+.menu-btn svg{width:26px;height:26px}
+@media(min-width:1100px){.menu-btn{display:none}}
+.mobile-menu{position:fixed;inset:0;z-index:60;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);padding:110px 28px 40px;display:flex;flex-direction:column;opacity:0;translate:0 -12px;pointer-events:none;transition:opacity var(--dur-slow) var(--ease-out),translate var(--dur-slow) var(--ease-out)}
+.mobile-menu.open{opacity:1;translate:0 0;pointer-events:auto}
+.mobile-menu a{font:500 24px/1.2 var(--display);letter-spacing:-.02em;text-decoration:none;padding:16px 0;border-bottom:1px solid var(--line)}
+.mobile-menu .btn{margin-top:auto;justify-content:center;font-size:13px;border-bottom:0}
+.mobile-menu .close{position:absolute;top:22px;right:20px}
+
+/* hero */
+.hero{position:relative;display:flex;flex-direction:column}
+@media(min-width:1024px){.hero{display:grid;grid-template-columns:var(--gx-1) 22% 38% 28% var(--gx-1);grid-template-rows:auto auto;min-height:calc(100vh - 92px);min-height:calc(100svh - 92px)}}
+.hero-main{order:1;padding:56px 24px 40px;position:relative;z-index:2}
+@media(min-width:1024px){.hero-main{grid-column:3;grid-row:1 / span 2;padding:8vh 44px 48px;display:flex;flex-direction:column;justify-content:center}}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px}
+.hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--carmim)}
+.hero h1{font-size:clamp(42px,5.3vw,96px);line-height:.98;letter-spacing:-.04em}
+.hero h1 span{display:block;white-space:nowrap}
+.hero h1 .l2{color:var(--soft);font-weight:500;padding-left:.45em}
+.hero h1 .l3{color:var(--carmim)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.hero-side{order:2;padding:32px 24px;border-top:1px solid var(--line);background:var(--mist);position:relative}
+@media(min-width:1024px){.hero-side{grid-column:2;grid-row:1 / span 2;background:none;border-top:0;border-right:1px solid var(--line);padding:8vh 32px 40px 0;display:flex;flex-direction:column;justify-content:space-between}}
+.hero-side p{color:var(--muted);font-size:16px;max-width:420px}
+.units{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);position:relative}
+.units ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.units li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--grafite)}
+.units li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--navy);opacity:.35}
+.units li.main::before{opacity:1;background:var(--carmim)}
+.units small{font-family:var(--mono);font-size:11px;color:var(--soft);margin-left:auto}
+.hero-photo{order:3;position:relative;height:280px;overflow:hidden;border-top:1px solid var(--line)}
+@media(min-width:640px){.hero-photo{height:380px}}
+@media(min-width:1024px){.hero-photo{grid-column:4;grid-row:1;height:auto;min-height:52vh;border-top:0;border-left:1px solid var(--line);overflow:visible}}
+.hero-photo .ph{position:absolute;inset:0;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-photo figcaption{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grafite);z-index:2}
+.hero-card{order:4;position:relative;padding:28px 24px 36px}
+@media(min-width:1024px){.hero-card{grid-column:4;grid-row:2;border-left:1px solid var(--line);border-top:1px solid var(--line);padding:28px 32px 36px}}
+
+/* signature: pressure curve */
+.curve-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.curve-head h2{font-size:18px;letter-spacing:-.01em}
+.curve svg{width:100%;height:auto;overflow:visible}
+.curve .grid line{stroke:var(--line);stroke-width:1}
+.curve .pa{fill:none;stroke:var(--carmim);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.curve .pd{fill:none;stroke:var(--navy);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;opacity:.85}
+.curve .draw{stroke-dasharray:1;stroke-dashoffset:1}
+.curve-legend{display:flex;gap:18px;margin-top:10px}
+.curve-legend span{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.curve-legend i{width:14px;height:2px;background:var(--carmim)}
+.curve-legend span+span i{background:var(--navy)}
+.curve-note{margin-top:16px;font-size:14px;color:var(--muted);border-left:2px solid var(--carmim-50);padding-left:12px}
+
+/* hero load motion */
+@keyframes reveal-up{from{clip-path:inset(100% 0 0 0);translate:0 18px;opacity:0}to{clip-path:inset(0 0 0 0);translate:0 0;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.js .rv{animation:reveal-up var(--dur-page) var(--ease-out) both}
+.js .fd{animation:fade var(--dur-page) var(--ease-out) both}
+.d1{animation-delay:.08s!important}.d2{animation-delay:.18s!important}.d3{animation-delay:.28s!important}.d4{animation-delay:.45s!important}
+.js .curve .draw{animation:draw 1.9s var(--ease-inout) .7s forwards}
+.js .curve .pd.draw{animation-delay:.95s}
+
+/* section scaffolding */
+section{position:relative;scroll-margin-top:92px}
+.sec{padding:96px 0}
+@media(min-width:1024px){.sec{padding:136px 0}}
+.sec-head{max-width:880px;margin-bottom:56px}
+.sec-head .label{display:block;margin-bottom:20px}
+.sec-head h2{font-size:clamp(34px,4.6vw,64px);letter-spacing:-.035em}
+.sec-head h2 .dim{color:var(--soft);font-weight:500}
+.sec-head p{margin-top:24px;font-size:18px;font-weight:300;color:var(--muted);max-width:640px}
+.bt{border-top:1px solid var(--line)}
+.bg-mist{background:var(--mist)}
+
+
+/* facts */
+.facts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(min-width:900px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact{padding:28px 20px 28px 0}
+.fact+.fact{padding-left:20px;border-left:1px solid var(--line)}
+@media(max-width:899px){.fact:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}.fact:nth-child(4){border-top:1px solid var(--line)}}
+.fact b{display:block;font:600 clamp(30px,3.4vw,44px)/1 var(--display);letter-spacing:-.03em;color:var(--navy);margin-bottom:10px}
+.fact span{font-size:14px;color:var(--muted);line-height:1.45;display:block;max-width:220px}
+
+/* sala híbrida */
+.sala{display:grid;gap:48px;margin-top:72px}
+@media(min-width:1024px){.sala{grid-template-columns:5fr 6fr;gap:80px;align-items:start}}
+.sala-list{list-style:none;padding:0;margin:0}
+.sala-list li{padding:22px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:28px 1fr;gap:14px}
+.sala-list li:first-child{border-top:1px solid var(--line)}
+.sala-list svg{width:20px;height:20px;color:var(--carmim);margin-top:3px}
+.sala-list h3{font-size:17px;letter-spacing:-.01em;margin-bottom:4px;line-height:1.3}
+.sala-list p{font-size:15px;color:var(--muted)}
+.sala-fig{position:relative;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.sala-fig img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.sala-fig figcaption{padding:14px 18px;font-size:13px;color:var(--muted);background:#fff;border-top:1px solid var(--line)}
+
+/* procedimentos */
+.feat{display:grid;gap:20px;margin-bottom:64px}
+@media(min-width:900px){.feat{grid-template-columns:repeat(3,1fr)}}
+.card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:32px;display:flex;flex-direction:column;transition:border-color var(--dur-base) var(--ease-out)}
+.card:hover{border-color:#C9CCDA}
+.card .label{margin-bottom:28px;color:var(--carmim)}
+.card h3{font-size:22px;margin-bottom:12px;letter-spacing:-.02em}
+.card p{font-size:15px;color:var(--muted)}
+.card .tag{margin-top:auto;padding-top:28px;font-family:var(--mono);font-size:11px;color:var(--soft);letter-spacing:.06em}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:8px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1px solid var(--line);background:#fff;color:var(--grafite);font:500 14px/1 var(--body);padding:12px 16px;border-radius:999px;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out),color var(--dur-quick) var(--ease-out),border-color var(--dur-quick) var(--ease-out)}
+.tab:hover{border-color:var(--navy)}
+.tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.tab small{font-family:var(--mono);font-size:11px;opacity:.6;margin-left:6px}
+.panel{border-top:1px solid var(--line);margin-top:20px}
+.panel[hidden]{display:none}
+.proc{border-bottom:1px solid var(--line)}
+.proc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0;font:500 17px/1.35 var(--display);letter-spacing:-.01em;color:var(--ink);transition:color var(--dur-quick) var(--ease-out)}
+.proc summary::-webkit-details-marker{display:none}
+.proc summary:hover{color:var(--navy)}
+.pm{flex:none;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;position:relative;transition:rotate var(--dur-base) var(--ease-out),border-color var(--dur-quick) var(--ease-out)}
+.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:1.5px;background:currentColor;translate:-50% -50%}
+.pm::after{rotate:90deg}
+.proc[open] .pm{rotate:45deg;border-color:var(--carmim);color:var(--carmim)}
+.proc p{padding:0 48px 22px 0;color:var(--muted);font-size:15px;max-width:760px}
+.proc::details-content{block-size:0;overflow:hidden;transition:block-size var(--dur-base) var(--ease-out),content-visibility var(--dur-base) allow-discrete}
+.proc[open]::details-content{block-size:auto}
+@media(min-width:1024px){.panel{columns:2;column-gap:64px}.proc{break-inside:avoid}}
+.proc-cta{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.proc-cta p{color:var(--muted);font-size:15px}
+
+/* etapas */
+.steps{display:grid;gap:0;counter-reset:s;border-top:1px solid var(--line)}
+@media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{padding:32px 24px 36px 0;border-bottom:1px solid var(--line);position:relative}
+@media(min-width:900px){.step{border-bottom:0;padding:36px 28px 8px 0}.step+.step{padding-left:28px;border-left:1px solid var(--line)}}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--carmim);display:block;margin-bottom:28px}
+.step h3{font-size:20px;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+.step p{font-size:15px;color:var(--muted)}
+
+/* equipe */
+.team{display:grid;gap:40px}
+@media(min-width:1024px){.team{grid-template-columns:5fr 7fr;gap:72px;align-items:start}}
+.team-photo{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff;position:relative}
+.team-photo img{width:100%;aspect-ratio:1;object-fit:cover}
+.team-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 18px;background:rgba(255,255,255,.92);border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.doc{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--line)}
+.doc:first-child{border-top:1px solid var(--line)}
+.doc img{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--mist)}
+.doc h3{font-size:20px;letter-spacing:-.02em;line-height:1.2}
+.doc .crm{font-family:var(--mono);font-size:11px;color:var(--soft);letter-spacing:.08em;margin:6px 0 12px;display:block}
+.doc .role{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:8px}
+.doc p{font-size:15px;color:var(--muted)}
+
+/* depoimentos */
+.quotes{display:grid;gap:20px}
+@media(min-width:900px){.quotes{grid-template-columns:7fr 5fr}}
+.q{background:#fff;border:1px solid var(--line);border-radius:3px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.q blockquote{margin:0;font-size:17px;line-height:1.65;color:var(--grafite);font-weight:300}
+.q.big blockquote{font-size:clamp(19px,1.7vw,23px);font-family:var(--display);font-weight:500;letter-spacing:-.015em;line-height:1.45;color:var(--ink)}
+.q blockquote::before{content:"\201C";display:block;font:700 56px/0.6 var(--display);color:var(--carmim);margin-bottom:14px}
+.q footer{display:flex;justify-content:space-between;align-items:end;gap:16px;border-top:1px solid var(--line);padding-top:18px;flex-wrap:wrap}
+.q cite{font-style:normal;font-weight:600;font-size:14px;display:block}
+.q footer span{font-size:13px;color:var(--muted)}
+.q .score{font-family:var(--mono);font-size:11px;color:var(--navy);background:var(--navy-50);padding:5px 8px;border-radius:3px;white-space:nowrap}
+.qcol{display:grid;gap:20px}
+.q-shot{margin:-32px -32px 0;aspect-ratio:21/9;overflow:hidden;border-bottom:1px solid var(--line)}
+.q-shot img{width:100%;height:100%;object-fit:cover;transition:scale 1.2s var(--ease-out)}
+.q:hover .q-shot img{scale:1.05}
+
+/* médicos */
+.medicos{background:var(--navy);color:#fff;overflow:hidden}
+.medicos .label{color:rgba(255,255,255,.55)}
+.medicos .sec-head h2 .dim{color:rgba(255,255,255,.4)}
+.medicos .sec-head p{color:rgba(255,255,255,.7)}
+.med-grid{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.14)}
+@media(min-width:900px){.med-grid{grid-template-columns:repeat(3,1fr)}}
+.med{padding:28px 28px 32px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+@media(min-width:900px){.med:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid rgba(255,255,255,.14)}}
+.med h3{font-size:18px;letter-spacing:-.01em;margin-bottom:8px;line-height:1.3}
+.med p{font-size:15px;color:rgba(255,255,255,.66)}
+.med-cta{margin-top:48px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
+.med-cta p{color:rgba(255,255,255,.66);font-size:15px}
+
+/* unidades */
+.timeline{display:grid;border-top:1px solid var(--line)}
+@media(min-width:900px){.timeline{grid-template-columns:repeat(4,1fr)}}
+.unit{padding:28px 24px 32px 0;border-bottom:1px solid var(--line);position:relative}
+@media(min-width:900px){.unit{border-bottom:0}.unit+.unit{padding-left:24px;border-left:1px solid var(--line)}}
+.unit .yr{font:600 40px/1 var(--display);letter-spacing:-.03em;color:var(--navy);display:block;margin-bottom:18px}
+.unit h3{font-size:18px;letter-spacing:-.01em;margin-bottom:6px}
+.unit p{font-size:14px;color:var(--muted)}
+.unit .marker{top:-3px;left:-3px}
+@media(max-width:899px){.unit .marker{display:none}}
+
+/* faq */
+.faq{max-width:880px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;font:500 19px/1.35 var(--display);letter-spacing:-.015em;transition:color var(--dur-quick) var(--ease-out)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--navy)}
+.faq details[open] .pm{rotate:45deg;border-color:var(--carmim);color:var(--carmim)}
+.faq details p{padding:0 48px 28px 0;color:var(--muted);font-size:16px;font-weight:300;line-height:1.7}
+.faq details::details-content{block-size:0;overflow:hidden;transition:block-size var(--dur-base) var(--ease-out),content-visibility var(--dur-base) allow-discrete}
+.faq details[open]::details-content{block-size:auto}
+
+/* cta final */
+.final{background:var(--navy-900);color:#fff;border-radius:3px;padding:40px 28px;display:grid;gap:28px;position:relative;overflow:hidden}
+@media(min-width:900px){.final{grid-template-columns:1fr auto;align-items:center;padding:56px}}
+.final h2{font-size:clamp(28px,3.2vw,42px);letter-spacing:-.03em;max-width:720px}
+.final p{margin-top:12px;color:rgba(255,255,255,.66);font-weight:300;font-size:17px}
+.final .phone{font-family:var(--mono);font-size:13px;color:rgba(255,255,255,.55);margin-top:14px;display:block;letter-spacing:.04em}
+
+/* footer */
+footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px 0 40px;margin-top:96px}
+.f-grid{display:grid;gap:40px;margin-bottom:64px}
+@media(min-width:900px){.f-grid{grid-template-columns:4fr 3fr 3fr 3fr}}
+.f-grid h4{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:18px}
+.f-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:14px;color:var(--muted)}
+.f-grid a{text-decoration:none;transition:color var(--dur-quick) var(--ease-out)}
+.f-grid a:hover{color:var(--navy)}
+.f-brand img{height:34px;width:auto;margin-bottom:20px}
+.f-brand p{font-size:14px;color:var(--muted);max-width:320px}
+.f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;border-top:1px solid var(--line);font-size:12px;color:var(--soft)}
+
+/* whatsapp flutuante */
+.wa{position:fixed;right:18px;bottom:18px;z-index:40;width:56px;height:56px;border-radius:50%;background:var(--carmim);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(206,0,0,.28);transition:background-color var(--dur-quick) var(--ease-out),translate var(--dur-base) var(--ease-out)}
+.wa:hover{background:var(--carmim-700);translate:0 -2px}
+.wa svg{width:26px;height:26px}
+
+
+/* ===== v2: imagens + movimento ===== */
+/* hero slideshow */
+.hero-photo .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--ease-inout)}
+.hero-photo .slide.on{opacity:1}
+.hero-photo .slide img{scale:1.08;transition:scale 7s linear}
+.hero-photo .slide.on img{scale:1}
+.hero-photo figcaption{transition:opacity var(--dur-base) var(--ease-out);max-width:calc(100% - 160px)}
+.slide-ctrl{position:absolute;right:16px;bottom:16px;z-index:3;display:flex;gap:6px;padding:4px 8px;border-radius:3px;background:rgba(7,9,64,.55);backdrop-filter:blur(6px)}
+.slide-ctrl button{width:34px;height:22px;padding:0;border:0;background:none;cursor:pointer;display:grid;align-items:center}
+.slide-ctrl button span{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.55);overflow:hidden}
+.slide-ctrl button span i{display:block;height:100%;width:100%;background:#fff;transform-origin:left;scale:0 1}
+.slide-ctrl button[aria-current="true"] span i{animation:bar 6s linear forwards}
+.hero-photo.paused .slide-ctrl button[aria-current="true"] span i{animation-play-state:paused}
+@keyframes bar{to{scale:1 1}}
+
+/* monitor sweep na curva */
+.curve{position:relative;overflow:hidden}
+.curve .sweep{position:absolute;top:0;bottom:30px;width:44px;left:-44px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff 70%);pointer-events:none;animation:sweep 3.2s linear 2.7s infinite}
+.curve .sweep::after{content:"";position:absolute;right:0;top:12%;width:6px;height:6px;border-radius:50%;background:var(--carmim);box-shadow:0 0 0 4px rgba(206,0,0,.12);translate:3px 0}
+@keyframes sweep{from{translate:0 0}to{translate:calc(100cqw + 88px) 0}}
+.curve{container-type:inline-size}
+
+/* faixa de procedimentos */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:#fff;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ticker-track{display:flex;width:max-content;animation:tick 60s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker ul{display:flex;list-style:none;margin:0;padding:18px 0;gap:0}
+.ticker li{display:flex;align-items:center;gap:22px;padding-right:22px;font:500 15px/1 var(--display);color:var(--grafite);white-space:nowrap;letter-spacing:-.01em}
+.ticker li::after{content:"";width:5px;height:5px;background:var(--carmim);border-radius:50%}
+@keyframes tick{to{translate:-50% 0}}
+
+/* banda de imagem full-bleed */
+.band{position:relative;margin:0;overflow:hidden;height:clamp(260px,42vw,620px);background:var(--navy-900)}
+.band img{width:100%;height:100%;object-fit:cover}
+.band figcaption{position:absolute;left:24px;bottom:22px;z-index:2;background:rgba(255,255,255,.92);border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grafite)}
+@media(min-width:1024px){.band figcaption{left:var(--gx-1)}}
+
+/* cards com foto */
+.card{padding:0;overflow:hidden}
+.card .shot{aspect-ratio:16/10;overflow:hidden;background:var(--navy-900);border-bottom:1px solid var(--line)}
+.card .shot img{width:100%;height:100%;object-fit:cover;transition:scale 1.2s var(--ease-out)}
+.card:hover .shot img{scale:1.06}
+.card .body{padding:28px 30px 30px;display:flex;flex-direction:column;flex:1}
+.card .label{margin-bottom:16px}
+
+/* equipe v2 */
+.team{display:block}
+.docs{display:grid;gap:0 40px;margin-top:48px}
+@media(min-width:1024px){.docs{grid-template-columns:repeat(3,1fr)}.doc{grid-template-columns:1fr;border-top:1px solid var(--line)}.doc img{width:88px;height:88px}}
+.team-band{border-radius:3px;border:1px solid var(--line);height:clamp(220px,34vw,520px)}
+
+/* fundos com foto */
+.medicos{isolation:isolate}
+.medicos .bgimg,.final .bgimg{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.medicos .bgimg img,.final .bgimg img{width:100%;height:100%;object-fit:cover;opacity:.16;filter:grayscale(1)}
+.medicos .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--navy) 0%,rgba(11,14,99,.6) 45%,var(--navy) 100%)}
+.final{isolation:isolate}
+.final .bgimg img{opacity:.22}
+.final .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy-900) 35%,rgba(7,9,64,.55))}
+
+/* linha da linha do tempo */
+.timeline{position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--carmim);transform-origin:left;scale:1 1}
+
+/* ===== scroll-driven (só onde o navegador suporta; sem suporte, tudo fica visível) ===== */
+@supports (animation-timeline: view()){
+  @keyframes rise{from{opacity:0;translate:0 32px}to{opacity:1;translate:0 0}}
+  @keyframes open-band{from{clip-path:inset(0 7% round 3px)}to{clip-path:inset(0 0 round 0)}}
+  @keyframes settle{from{scale:1.18}to{scale:1}}
+  @keyframes grow-x{from{scale:0 1}to{scale:1 1}}
+  @keyframes drift{from{translate:0 -6%}to{translate:0 6%}}
+  .sr{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+  .stagger>*{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  .stagger>*:nth-child(2){animation-range:entry 8% entry 78%}
+  .stagger>*:nth-child(3){animation-range:entry 16% entry 86%}
+  .stagger>*:nth-child(4){animation-range:entry 24% entry 94%}
+  .stagger>*:nth-child(5){animation-range:entry 30% entry 100%}
+  .stagger>*:nth-child(6){animation-range:entry 36% cover 40%}
+  .band{animation:open-band linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  .band img,.team-band img{animation:settle linear both;animation-timeline:view();animation-range:entry 0% exit 0%}
+  .timeline::before{animation:grow-x linear both;animation-timeline:view();animation-range:entry 20% cover 45%}
+  .medicos .bgimg img{animation:drift linear both;animation-timeline:view();animation-range:entry 0% exit 100%;height:115%}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .sr,.stagger>*,.band,.band img,.team-band img,.medicos .bgimg img{animation:none!important}
+  .curve .sweep,.ticker-track{animation:none!important}
+  .curve .sweep{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="mobile-menu" id="menu" aria-hidden="true">
+  <button class="menu-btn close" id="menu-close" aria-label="Fechar menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <a href="#sala">Sala híbrida</a>
+  <a href="#procedimentos">Procedimentos</a>
+  <a href="#equipe">Equipe</a>
+  <a href="#medicos">Para médicos</a>
+  <a href="#unidades">Unidades</a>
+  <a href="#duvidas">Dúvidas</a>
+  <a class="btn btn-red" data-wa="paciente" href="https://wa.me/5531971364667">Falar no WhatsApp</a>
+</div>
+
+<header class="nav">
+  <a class="brand" href="#" aria-label="CardioInterv MaterDei, início">
+    <img class="sym" src="assets/simbolo.png" alt="" width="234" height="240">
+    <img class="wm" src="assets/wordmark.png" alt="CardioInterv MaterDei" width="520" height="129">
+  </a>
+  <nav class="nav-links" aria-label="Principal">
+    <a href="#sala">Sala híbrida</a>
+    <a href="#procedimentos">Procedimentos</a>
+    <a href="#equipe">Equipe</a>
+    <a href="#medicos">Para médicos</a>
+    <a href="#unidades">Unidades</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:8px">
+    <a class="btn btn-navy" data-wa="paciente" href="https://wa.me/5531971364667">Falar com a equipe</a>
+    <button class="menu-btn" id="menu-open" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+  </div>
+</header>
+
+<main id="conteudo">
+<!-- HERO -->
+<section class="hero">
+  <div class="gl" aria-hidden="true"><i style="left:var(--gx-1)"></i><i style="left:var(--gx-2)"></i><i style="left:var(--gx-3)"></i><i style="left:var(--gx-4)"></i></div>
+
+  <div class="hero-main">
+    <div class="hero-eyebrow label rv"><span class="dot"></span>Hemodinâmica · Rede Mater Dei</div>
+    <h1>
+      <span class="rv d1">Tratamos</span>
+      <span class="rv d2">o coração</span>
+      <span class="l2 rv d2">por dentro</span>
+      <span class="l3 rv d3">das artérias.</span>
+    </h1>
+    <div class="hero-cta fd d4">
+      <a class="btn btn-red" data-wa="paciente" href="https://wa.me/5531971364667">Falar com a equipe
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-line" href="#medicos">Sou médico e quero encaminhar</a>
+    </div>
+  </div>
+
+  <div class="hero-side">
+    <p class="fd d2">Somos a equipe que faz cateterismo, angioplastia, TAVI e outros procedimentos por cateter nos hospitais Mater Dei de Belo Horizonte, Nova Lima e Betim-Contagem. Desde 2014.</p>
+    <div class="units fd d3">
+      <span class="marker" style="top:-3px;left:-3px" aria-hidden="true"></span>
+      <span class="label">Onde atendemos</span>
+      <ul>
+        <li class="main">Mater Dei Contorno <small>2014</small></li>
+        <li>Mater Dei Betim-Contagem <small>2019</small></li>
+        <li>Mater Dei Santo Agostinho <small>2022</small></li>
+        <li>Mater Dei Nova Lima <small>2024</small></li>
+      </ul>
+    </div>
+  </div>
+
+  <figure class="hero-photo fd d1" style="margin:0">
+    <span class="marker" style="top:-3px;left:-3px" aria-hidden="true"></span>
+    <div class="ph">
+      <div class="slide on" data-cap="Sala híbrida · Mater Dei Contorno"><img src="assets/sala-hibrida.webp" alt="Sala híbrida de hemodinâmica do Hospital Mater Dei Contorno, com angiógrafo, mesa cirúrgica e monitores" width="1800" height="1198" fetchpriority="high"></div>
+      <div class="slide" data-cap="Dr. Lucas Lodi na sala híbrida"><img src="assets/equipe-sala.webp" alt="Dr. Lucas Lodi Junqueira, de jaleco, na sala híbrida" width="1600" height="470" loading="lazy" style="object-position:50% 40%"></div>
+      <div class="slide" data-cap="Sala de comando · vista para a sala híbrida"><img src="assets/sala-comando.webp" alt="Sala de comando com monitores de angiografia e vista, pelo vidro, para a sala híbrida" width="1400" height="932" loading="lazy"></div>
+    </div>
+    <figcaption id="slide-cap" aria-live="polite">Sala híbrida · Mater Dei Contorno</figcaption>
+    <div class="slide-ctrl" role="group" aria-label="Fotos">
+      <button type="button" aria-label="Foto 1: sala híbrida" aria-current="true"><span><i></i></span></button>
+      <button type="button" aria-label="Foto 2: Dr. Lucas Lodi" aria-current="false"><span><i></i></span></button>
+      <button type="button" aria-label="Foto 3: sala de comando" aria-current="false"><span><i></i></span></button>
+    </div>
+  </figure>
+
+  <div class="hero-card fd d3">
+    <span class="marker" style="top:-3px;left:-3px" aria-hidden="true"></span>
+    <div class="curve-head">
+      <h2>Pressão medida por dentro da artéria</h2>
+      <span class="label">FFR</span>
+    </div>
+    <div class="curve">
+      <svg viewBox="0 0 360 96" role="img" aria-label="Duas curvas de pressão: antes e depois de uma obstrução na artéria coronária">
+        <g class="grid"><line x1="0" y1="20" x2="360" y2="20"/><line x1="0" y1="46" x2="360" y2="46"/><line x1="0" y1="72" x2="360" y2="72"/></g>
+        <path class="pa draw" pathLength="1" d="M0,72 c6,0 8,-48 18,-50 c10,-2 16,14 22,24 c2,3 4,-2 8,-2 c14,2 42,24 72,28 c6,0 8,-48 18,-50 c10,-2 16,14 22,24 c2,3 4,-2 8,-2 c14,2 42,24 72,28 c6,0 8,-48 18,-50 c10,-2 16,14 22,24 c2,3 4,-2 8,-2 c14,2 42,24 72,28"/>
+        <g transform="translate(0 15.84) scale(1 .78)"><path class="pd draw" pathLength="1" vector-effect="non-scaling-stroke" d="M0,72 c6,0 8,-48 18,-50 c10,-2 16,14 22,24 c2,3 4,-2 8,-2 c14,2 42,24 72,28 c6,0 8,-48 18,-50 c10,-2 16,14 22,24 c2,3 4,-2 8,-2 c14,2 42,24 72,28 c6,0 8,-48 18,-50 c10,-2 16,14 22,24 c2,3 4,-2 8,-2 c14,2 42,24 72,28"/></g>
+      </svg>
+      <span class="sweep" aria-hidden="true"></span>
+      <div class="curve-legend"><span><i></i>Antes da obstrução</span><span><i></i>Depois da obstrução</span></div>
+    </div>
+    <p class="curve-note">A diferença entre as duas curvas diz se a obstrução prejudica o fluxo de sangue. É isso que decide, no mesmo exame, se o stent é necessário.</p>
+  </div>
+</section>
+
+
+<div class="ticker" aria-label="Alguns dos procedimentos que fazemos">
+  <div class="ticker-track"><ul><li>Coronariografia</li><li>Angioplastia coronária</li><li>TAVI</li><li>FFR · iFR · RFR</li><li>IVUS e OCT</li><li>Valvoplastia por balão</li><li>Oclusão de CIA e forame oval</li><li>Oclusão do apêndice atrial</li><li>Valve-in-valve mitral</li><li>Aterectomia rotacional</li><li>Angioplastia periférica</li><li>Endoprótese para aneurismas</li><li>Biópsia endomiocárdica</li><li>Embolização de mioma</li><li>Embolização de próstata</li></ul><ul aria-hidden="true"><li>Coronariografia</li><li>Angioplastia coronária</li><li>TAVI</li><li>FFR · iFR · RFR</li><li>IVUS e OCT</li><li>Valvoplastia por balão</li><li>Oclusão de CIA e forame oval</li><li>Oclusão do apêndice atrial</li><li>Valve-in-valve mitral</li><li>Aterectomia rotacional</li><li>Angioplastia periférica</li><li>Endoprótese para aneurismas</li><li>Biópsia endomiocárdica</li><li>Embolização de mioma</li><li>Embolização de próstata</li></ul></div>
+</div>
+
+<!-- SALA HÍBRIDA -->
+<section class="sec bt" id="sala">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="label">Estrutura</span>
+      <h2>Hemodinâmica e centro cirúrgico <span class="dim">na mesma sala.</span></h2>
+      <p>Os exames no Mater Dei Contorno são feitos na sala híbrida. Ela tem o equipamento de hemodinâmica e a estrutura de um centro cirúrgico. Se o procedimento precisar virar cirurgia, o paciente continua ali, sem transferência.</p>
+    </div>
+
+    <div class="facts sr">
+      <div class="fact"><b>12 anos</b><span>de equipe, desde a abertura do Mater Dei Contorno em 2014</span></div>
+      <div class="fact"><b>4</b><span>unidades do Hospital Mater Dei com atendimento da equipe</span></div>
+      <div class="fact"><b>85–100</b><span>atendimentos por mês</span></div>
+      <div class="fact"><b>até 73%</b><span>menos radiação para o paciente, com a tecnologia Allura Clarity</span></div>
+    </div>
+
+    <div class="sala">
+      <ul class="sala-list stagger">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+          <div><h3>Angiógrafo Philips Allura FlexMove FD20</h3><p>Com a tecnologia Clarity, a dose de radiação recebida pelo paciente cai até 73%. O recurso StentBoost mostra com nitidez um stent já implantado.</p></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <div><h3>Paredes com revestimento Variop</h3><p>Material desenvolvido na Alemanha que facilita a esterilização do ambiente e reduz o risco de infecção.</p></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="15" r="3"/><path d="M10 17V5l10-2v12"/></svg>
+          <div><h3>Luz e música ambiente</h3><p>A iluminação e a música da sala podem ser ajustadas. Parece detalhe, mas ajuda muito quem chega nervoso para o exame.</p></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 21v-6a5 5 0 0110 0v6"/><path d="M9 11V5a3 3 0 016 0v6"/></svg>
+          <div><h3>Pelo punho, sempre que possível</h3><p>Preferimos a via radial, no punho, porque o risco de sangramento é menor do que pela virilha.</p></div></li>
+      </ul>
+      <figure class="sala-fig sr" style="margin:0">
+        <img src="assets/sala-comando.webp" alt="Sala de comando com monitores de angiografia e vista, pelo vidro, para a sala híbrida" width="1400" height="932" loading="lazy">
+        <figcaption>Sala de comando. Pelo vidro, a sala híbrida do Mater Dei Contorno.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<figure class="band">
+  <img src="assets/procedimento.webp" alt="Procedimento por cateter: sistema de entrega posicionado, com fluoroscopia e ecocardiograma 3D nos monitores" width="1600" height="470" loading="lazy">
+  <figcaption>Cateter, fluoroscopia e eco 3D ao mesmo tempo</figcaption>
+</figure>
+
+<!-- PROCEDIMENTOS -->
+<section class="sec bt bg-mist" id="procedimentos">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="label">Procedimentos</span>
+      <h2>Do cateterismo à troca de valva, <span class="dim">tudo por cateter.</span></h2>
+      <p>Fazemos 28 procedimentos diferentes, de exames diagnósticos a tratamentos que antes exigiam abrir o tórax. Estes três são os que mais nos procuram.</p>
+    </div>
+
+    <div class="feat stagger">
+      <article class="card">
+        <div class="shot"><img src="assets/card-cateterismo.webp" alt="Monitor da sala de comando mostrando a imagem das artérias coronárias com contraste" width="900" height="723" loading="lazy"></div>
+        <div class="body">
+        <span class="label">Diagnóstico</span>
+        <h3>Cateterismo cardíaco</h3>
+        <p>O nome técnico é coronariografia. Um cateter fino chega às artérias do coração e o contraste mostra, em imagem, onde há obstrução e de que tamanho.</p>
+        <span class="tag">Coronariografia</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/card-angioplastia.webp" alt="Cateter posicionado diante do monitor de fluoroscopia" width="820" height="470" loading="lazy"></div>
+        <div class="body">
+        <span class="label">Tratamento</span>
+        <h3>Angioplastia com stent</h3>
+        <p>Um balão abre a artéria entupida e um stent, uma pequena malha de metal, fica no lugar para manter o sangue passando. Muitas vezes é feita no mesmo procedimento do cateterismo.</p>
+        <span class="tag">Angioplastia coronária</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="assets/card-tavi.webp" alt="Monitor com ecocardiograma 3D usado para guiar procedimentos em valvas do coração" width="600" height="410" loading="lazy"></div>
+        <div class="body">
+        <span class="label">Tratamento</span>
+        <h3>TAVI</h3>
+        <p>Troca da valva aórtica por cateter, sem cirurgia de peito aberto. A nova valva é levada até o coração por uma artéria e encaixada dentro da valva doente.</p>
+        <span class="tag">Implante transcateter de valva aórtica</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Procedimentos por grupo">
+      <button class="tab" role="tab" id="t-diag" aria-controls="p-diag" aria-selected="true">Diagnóstico<small>10</small></button>
+      <button class="tab" role="tab" id="t-cor" aria-controls="p-cor" aria-selected="false" tabindex="-1">Coronárias<small>2</small></button>
+      <button class="tab" role="tab" id="t-val" aria-controls="p-val" aria-selected="false" tabindex="-1">Valvas<small>6</small></button>
+      <button class="tab" role="tab" id="t-est" aria-controls="p-est" aria-selected="false" tabindex="-1">Defeitos do coração<small>4</small></button>
+      <button class="tab" role="tab" id="t-vas" aria-controls="p-vas" aria-selected="false" tabindex="-1">Vasos e embolizações<small>6</small></button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-diag" aria-labelledby="t-diag">
+      <details class="proc"><summary>Coronariografia (cateterismo)<span class="pm" aria-hidden="true"></span></summary><p>Exame que mapeia as artérias do coração e mostra onde estão as obstruções.</p></details>
+      <details class="proc"><summary>Imagem intravascular: ultrassom (IVUS) e tomografia de coerência óptica (OCT)<span class="pm" aria-hidden="true"></span></summary><p>Imagens de altíssima resolução feitas de dentro da artéria. Servem para planejar a angioplastia e conferir se o stent ficou bem expandido.</p></details>
+      <details class="proc"><summary>Avaliação fisiológica das obstruções (FFR, iFR, RFR)<span class="pm" aria-hidden="true"></span></summary><p>Mede a pressão antes e depois da obstrução para saber se ela realmente reduz o fluxo de sangue e precisa de tratamento.</p></details>
+      <details class="proc"><summary>Testes funcionais coronários invasivos<span class="pm" aria-hidden="true"></span></summary><p>Avaliam a microcirculação do coração, o espasmo das artérias e as pontes miocárdicas, causas de dor no peito que o cateterismo comum não mostra.</p></details>
+      <details class="proc"><summary>Manometria cardíaca<span class="pm" aria-hidden="true"></span></summary><p>Medida direta da pressão dentro das câmaras do coração.</p></details>
+      <details class="proc"><summary>Teste de vasorreatividade pulmonar<span class="pm" aria-hidden="true"></span></summary><p>Mostra como a circulação dos pulmões responde a medicamentos. Ajuda a definir o tratamento da hipertensão pulmonar.</p></details>
+      <details class="proc"><summary>Estudo hemodinâmico das cardiopatias congênitas<span class="pm" aria-hidden="true"></span></summary><p>Mede fluxos e pressões em alterações do coração presentes desde o nascimento.</p></details>
+      <details class="proc"><summary>Arteriografia pulmonar<span class="pm" aria-hidden="true"></span></summary><p>Exame com contraste dos vasos do pulmão, para diagnosticar coágulos, embolia e malformações.</p></details>
+      <details class="proc"><summary>Aortografia<span class="pm" aria-hidden="true"></span></summary><p>Imagem da aorta, a maior artéria do corpo, para identificar aneurismas, placas e outras alterações.</p></details>
+      <details class="proc"><summary>Biópsia endomiocárdica<span class="pm" aria-hidden="true"></span></summary><p>Retirada de fragmentos muito pequenos do músculo do coração para diagnosticar miocardite, rejeição de transplante e doenças raras.</p></details>
+    </div>
+    <div class="panel" role="tabpanel" id="p-cor" aria-labelledby="t-cor" hidden>
+      <details class="proc"><summary>Angioplastia coronária<span class="pm" aria-hidden="true"></span></summary><p>Desobstrução das artérias do coração com balão e implante de stent.</p></details>
+      <details class="proc"><summary>Aterectomia coronária rotacional<span class="pm" aria-hidden="true"></span></summary><p>Uma broca muito fina desgasta placas de cálcio duras demais para o balão. Depois disso, o stent consegue ser implantado com segurança.</p></details>
+    </div>
+    <div class="panel" role="tabpanel" id="p-val" aria-labelledby="t-val" hidden>
+      <details class="proc"><summary>Implante transcateter de valva aórtica (TAVI)<span class="pm" aria-hidden="true"></span></summary><p>Troca da valva aórtica por cateter, sem cirurgia de peito aberto.</p></details>
+      <details class="proc"><summary>Valve-in-valve mitral (ViV)<span class="pm" aria-hidden="true"></span></summary><p>Implante de uma nova valva por cateter dentro de uma prótese mitral biológica que se desgastou.</p></details>
+      <details class="proc"><summary>Valvoplastia por balão (mitral, pulmonar e aórtica)<span class="pm" aria-hidden="true"></span></summary><p>Um balão é inflado dentro da valva estreitada para abri-la.</p></details>
+      <details class="proc"><summary>Tratamento percutâneo da insuficiência mitral<span class="pm" aria-hidden="true"></span></summary><p>Reparo da valva mitral por cateter, para reduzir o refluxo de sangue dentro do coração.</p></details>
+      <details class="proc"><summary>Tratamento percutâneo da insuficiência tricúspide<span class="pm" aria-hidden="true"></span></summary><p>Correção por cateter da valva tricúspide que não fecha direito.</p></details>
+      <details class="proc"><summary>Tratamento de leak paravalvar<span class="pm" aria-hidden="true"></span></summary><p>Fechamento por cateter de pequenos vazamentos de sangue ao redor de uma prótese de valva.</p></details>
+    </div>
+    <div class="panel" role="tabpanel" id="p-est" aria-labelledby="t-est" hidden>
+      <details class="proc"><summary>Oclusão do apêndice atrial esquerdo<span class="pm" aria-hidden="true"></span></summary><p>Fechamento por cateter de uma pequena cavidade do coração onde se formam coágulos. Previne AVC em pacientes com fibrilação atrial.</p></details>
+      <details class="proc"><summary>Oclusão de CIA, CIV e forame oval patente<span class="pm" aria-hidden="true"></span></summary><p>Fechamento por cateter de orifícios nas paredes internas do coração, sem cirurgia.</p></details>
+      <details class="proc"><summary>Outras cardiopatias congênitas<span class="pm" aria-hidden="true"></span></summary><p>Correções por cateter de alterações presentes desde o nascimento, como atriosseptostomia e angioplastia do canal arterial.</p></details>
+      <details class="proc"><summary>Embolização septal na cardiomiopatia hipertrófica<span class="pm" aria-hidden="true"></span></summary><p>Redução controlada do excesso de músculo que obstrui a saída de sangue do coração.</p></details>
+    </div>
+    <div class="panel" role="tabpanel" id="p-vas" aria-labelledby="t-vas" hidden>
+      <details class="proc"><summary>Angioplastia pulmonar<span class="pm" aria-hidden="true"></span></summary><p>Desobstrução por cateter das artérias dos pulmões em tromboembolismo pulmonar agudo ou crônico.</p></details>
+      <details class="proc"><summary>Angioplastia renal e de vasos esplâncnicos<span class="pm" aria-hidden="true"></span></summary><p>Desobstrução das artérias que levam sangue aos rins e aos órgãos do abdome.</p></details>
+      <details class="proc"><summary>Angioplastia de vasos periféricos<span class="pm" aria-hidden="true"></span></summary><p>Tratamento de artérias entupidas nas pernas e nos braços. Alivia a dor ao caminhar.</p></details>
+      <details class="proc"><summary>Endoprótese para aneurismas<span class="pm" aria-hidden="true"></span></summary><p>Um tubo reforçado é colocado por cateter dentro da artéria dilatada para evitar que ela se rompa.</p></details>
+      <details class="proc"><summary>Embolização de próstata<span class="pm" aria-hidden="true"></span></summary><p>Redução do fluxo de sangue para a próstata aumentada, tratando o crescimento benigno sem cirurgia convencional.</p></details>
+      <details class="proc"><summary>Embolização de mioma<span class="pm" aria-hidden="true"></span></summary><p>Bloqueio dos vasos que alimentam o mioma. Diminui o sangramento e preserva o útero.</p></details>
+    </div>
+
+    <div class="proc-cta">
+      <a class="btn btn-navy" data-wa="paciente" href="https://wa.me/5531971364667">Tirar dúvida sobre um procedimento
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p>Recebeu um pedido de exame e quer entender o que vai ser feito? Pode perguntar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="sec bt" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="label">Do agendamento à alta</span>
+      <h2>Quem explica o exame <span class="dim">é quem vai fazer o exame.</span></h2>
+    </div>
+    <ol class="steps stagger" style="list-style:none;margin:0;padding:0">
+      <li class="step"><span class="n">01</span><h3>Conversa antes</h3><p>Um dos médicos da equipe fala com você sobre o preparo, os cuidados e o que vai acontecer na sala.</p></li>
+      <li class="step"><span class="n">02</span><h3>Horário que cabe na sua rotina</h3><p>Exames eletivos podem ser marcados à noite e nos fins de semana, combinando com você e com o seu cardiologista.</p></li>
+      <li class="step"><span class="n">03</span><h3>O procedimento</h3><p>Na sala híbrida, pelo punho sempre que possível. Se houver dúvida sobre a necessidade de stent, a FFR é medida ali mesmo.</p></li>
+      <li class="step"><span class="n">04</span><h3>Depois</h3><p>Você sai com as orientações de cuidado em casa, e o seu cardiologista recebe o retorno da equipe.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="sec bt bg-mist" id="equipe">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="label">Equipe médica</span>
+      <h2>Médicos que também <span class="dim">ensinam e pesquisam.</span></h2>
+      <p>A equipe se formou em 2014 com médicos que já trabalhavam com hemodinâmica em outros hospitais de Belo Horizonte. Hoje também formamos os residentes de cardiologia do Mater Dei.</p>
+    </div>
+    <div class="team">
+      <figure class="band team-band" style="margin:0">
+        <img src="assets/equipe-sala.webp" alt="Dr. Guilherme Athayde, Dr. Lucas Lodi e Dr. Fernando Gusmão na sala híbrida" width="1600" height="470" loading="lazy" style="object-position:50% 30%">
+        <figcaption>Guilherme Athayde, Lucas Lodi e Fernando Gusmão, na sala híbrida</figcaption>
+      </figure>
+      <div class="docs stagger">
+        <article class="doc">
+          <img src="assets/lucas.webp" alt="" width="300" height="300" loading="lazy">
+          <div><h3>Dr. Lucas Lodi Junqueira</h3><span class="crm">CRM-MG 36986</span>
+            <p class="role">Coordenador do Serviço de Cardiologia Intervencionista da Rede Mater Dei</p>
+            <p>Mestre e doutor pela Faculdade de Medicina da UFMG. Coordenou a hemodinâmica do Hospital das Clínicas da UFMG de 2008 a 2024. Revisor de revistas como Heart e Catheterization and Cardiovascular Interventions.</p></div>
+        </article>
+        <article class="doc">
+          <img src="assets/guilherme.webp" alt="" width="300" height="300" loading="lazy">
+          <div><h3>Dr. Guilherme Athayde</h3><span class="crm">CRM-MG 44774</span>
+            <p class="role">Coordenador do Serviço de Cardiologia Intervencionista da Rede Mater Dei</p>
+            <p>Mestre e doutor pela Faculdade de Medicina da UFMG, onde é pesquisador. Preceptor das residências de cardiologia do HC-UFMG e do Mater Dei. Especialista em hemodinâmica pela SBHCI.</p></div>
+        </article>
+        <article class="doc">
+          <img src="assets/fernando.webp" alt="" width="300" height="300" loading="lazy">
+          <div><h3>Dr. Fernando Gusmão</h3><span class="crm">CRM-MG 41357</span>
+            <p class="role">Hemodinamicista</p>
+            <p>Formado pela UNIFAC Barbacena. Especialização em cardiologia e em hemodinâmica e cardiologia intervencionista no Hospital Felício Rocho. Membro da Sociedade Brasileira de Cardiologia.</p></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="sec bt" id="depoimentos">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="label">Pacientes</span>
+      <h2>O que ficou <span class="dim">depois do exame.</span></h2>
+      <p>Trechos da pesquisa de satisfação que o paciente responde depois do procedimento.</p>
+    </div>
+    <div class="quotes stagger">
+      <figure class="q big" style="margin:0">
+        <div class="q-shot"><img src="assets/sala-angulo.webp" alt="Sala híbrida do Mater Dei Contorno vista de outro ângulo" width="705" height="469" loading="lazy"></div>
+        <blockquote>Em cada etapa, pude sentir o cuidado e a dedicação de todos. A estrutura é excelente, mas, acima de tudo, o que mais me marcou foi o atendimento humano e o carinho de cada profissional.</blockquote>
+        <footer><div><cite>Flavio Sérgio de Aguiar</cite><span>Cateterismo · Mater Dei Contorno</span></div><span class="score">Nota 10 / 10</span></footer>
+      </figure>
+      <div class="qcol">
+        <figure class="q sr" style="margin:0">
+          <blockquote>Me deram todo o apoio necessário desde o primeiro momento, quando eu não tinha conhecimento sobre a progressão do meu problema, até a agilidade no apoio ao plano de saúde, procedimento e recuperação.</blockquote>
+          <footer><div><cite>Luciana Durães Pires</cite><span>Oclusão percutânea de CIA · Betim-Contagem</span></div><span class="score">Nota 10 / 10</span></footer>
+        </figure>
+        <figure class="q sr" style="margin:0">
+          <blockquote>Geórgia e Simone são excelentes profissionais. Me ajudaram muito nas ligações que eu precisei fazer.</blockquote>
+          <footer><div><cite>Elson de Moraes</cite><span>Cateterismo · Mater Dei Santo Agostinho</span></div><span class="score">Nota 10 / 10</span></footer>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉDICOS -->
+<section class="sec medicos" id="medicos">
+  <div class="bgimg" aria-hidden="true"><img src="assets/sala-comando.webp" alt="" loading="lazy"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <div class="sec-head sr">
+      <span class="label">Para médicos</span>
+      <h2>Para o cardiologista <span class="dim">que encaminha.</span></h2>
+      <p>O paciente continua sendo seu. A gente conversa sobre o caso antes do procedimento e dá o retorno depois.</p>
+    </div>
+    <div class="med-grid stagger">
+      <div class="med"><h3>FFR no mesmo tempo do diagnóstico</h3><p>Quando a medida define a conduta, fazemos FFR, iFR ou RFR durante o cateterismo diagnóstico, sem segundo procedimento.</p></div>
+      <div class="med"><h3>IVUS e OCT</h3><p>Imagem intravascular para planejar a angioplastia e otimizar o resultado do stent.</p></div>
+      <div class="med"><h3>Via radial como padrão</h3><p>Sempre que a anatomia permite. Menos sangramento e mobilização mais cedo.</p></div>
+      <div class="med"><h3>Sala híbrida para o paciente instável</h3><p>Se houver necessidade de conversão cirúrgica, não há transporte entre salas.</p></div>
+      <div class="med"><h3>FD20 com Clarity e StentBoost</h3><p>Até 73% menos dose de radiação e realce do stent previamente implantado.</p></div>
+      <div class="med"><h3>Agenda estendida</h3><p>Exames eletivos à noite e nos fins de semana, e contato direto com o médico que vai fazer o procedimento.</p></div>
+    </div>
+    <div class="med-cta">
+      <a class="btn btn-white" data-wa="medico" href="https://wa.me/5531971364667">Encaminhar um paciente
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p>Fale direto com a equipe pelo WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- UNIDADES -->
+<section class="sec" id="unidades">
+  <div class="wrap">
+    <div class="sec-head sr">
+      <span class="label">Unidades</span>
+      <h2>Uma unidade em 2014. <span class="dim">Quatro hoje.</span></h2>
+    </div>
+    <div class="timeline sr">
+      <div class="unit"><span class="marker" aria-hidden="true"></span><span class="yr">2014</span><h3>Mater Dei Contorno</h3><p>Av. do Contorno, 9000, Barro Preto, Belo Horizonte. Onde fica a sala híbrida.</p></div>
+      <div class="unit"><span class="marker" aria-hidden="true"></span><span class="yr">2019</span><h3>Mater Dei Betim-Contagem</h3><p>Unidade construída já com o serviço de hemodinâmica.</p></div>
+      <div class="unit"><span class="marker" aria-hidden="true"></span><span class="yr">2022</span><h3>Mater Dei Santo Agostinho</h3><p>Belo Horizonte, região Centro-Sul.</p></div>
+      <div class="unit"><span class="marker" aria-hidden="true"></span><span class="yr">2024</span><h3>Mater Dei Nova Lima</h3><p>Serviço de hemodinâmica inaugurado em 2024.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec bt" id="duvidas">
+  <div class="wrap">
+    <div class="sec-head sr"><span class="label">Dúvidas frequentes</span><h2>Antes de marcar.</h2></div>
+    <div class="faq">
+      <details><summary>Qual a diferença entre cateterismo e angioplastia?<span class="pm" aria-hidden="true"></span></summary><p>O cateterismo é o exame: mostra onde estão as obstruções nas artérias do coração. A angioplastia é o tratamento: abre a artéria com um balão e, na maioria das vezes, deixa um stent no lugar. Quando o cateterismo encontra uma obstrução que precisa ser tratada, os dois podem acontecer no mesmo procedimento.</p></details>
+      <details><summary>O exame é feito pelo braço ou pela virilha?<span class="pm" aria-hidden="true"></span></summary><p>Sempre que possível, pelo punho (artéria radial). Essa via tem menos risco de sangramento. Em alguns casos, como na TAVI, a virilha é necessária por causa do tamanho do material.</p></details>
+      <details><summary>Posso marcar à noite ou no fim de semana?<span class="pm" aria-hidden="true"></span></summary><p>Sim. Exames eletivos podem ser agendados fora do horário comercial, combinando com você e com o seu cardiologista.</p></details>
+      <details><summary>E a radiação?<span class="pm" aria-hidden="true"></span></summary><p>O angiógrafo da sala híbrida é um Philips Allura FlexMove FD20 com a tecnologia Clarity, que reduz em até 73% a dose de radiação recebida pelo paciente.</p></details>
+      <details><summary>Quem me explica o preparo?<span class="pm" aria-hidden="true"></span></summary><p>Um dos médicos da equipe, os mesmos que fazem o procedimento. Mande uma mensagem pelo WhatsApp e a gente combina o melhor horário para conversar.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contato">
+  <div class="wrap">
+    <div class="final sr">
+      <div class="bgimg" aria-hidden="true"><img src="assets/sala-angulo.webp" alt="" loading="lazy"></div>
+      <div>
+        <h2>Tem um pedido de exame ou uma indicação do seu cardiologista?</h2>
+        <p>Mande uma mensagem. A equipe responde e explica os próximos passos.</p>
+        <span class="phone">WhatsApp (31) 97136-4667</span>
+      </div>
+      <a class="btn btn-red" data-wa="paciente" href="https://wa.me/5531971364667">Chamar no WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <img src="assets/wordmark.png" alt="CardioInterv MaterDei" width="520" height="129" loading="lazy">
+        <p>Hemodinâmica e cardiologia intervencionista nos hospitais da Rede Mater Dei de Saúde, desde 2014.</p>
+      </div>
+      <div><h4>Contato</h4><ul>
+        <li><a data-wa="paciente" href="https://wa.me/5531971364667">WhatsApp (31) 97136-4667</a></li>
+        <li><a href="mailto:admcardiointerv@gmail.com">admcardiointerv@gmail.com</a></li>
+      </ul></div>
+      <div><h4>Endereço</h4><ul>
+        <li>Hospital Mater Dei Contorno<br>Av. do Contorno, 9000, Barro Preto<br>Belo Horizonte, MG · 30110-062</li>
+      </ul></div>
+      <div><h4>Redes</h4><ul>
+        <li><a href="https://www.instagram.com/cardiointervmaterdei/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/CardioIntervMaterDei" target="_blank" rel="noopener">Facebook</a></li>
+      </ul></div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 CardioInterv MaterDei</span>
+      <span>As informações desta página não substituem a consulta com o seu médico.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" data-wa="paciente" href="https://wa.me/5531971364667" aria-label="Falar pelo WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.3a.4.4 0 000-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.3 2.2 2.2 0 00.2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<script>
+document.documentElement.classList.add('js');
+// Mensagens pré-preenchidas do WhatsApp (chamada principal do briefing)
+var WA = {
+  paciente: 'Olá, meu nome é ____. Gostaria de mais informações, pode me ajudar?',
+  medico: 'Olá, sou médico(a) e gostaria de encaminhar um paciente para a equipe CardioInterv.'
+};
+document.querySelectorAll('[data-wa]').forEach(function(a){
+  a.href = 'https://wa.me/5531971364667?text=' + encodeURIComponent(WA[a.dataset.wa]);
+  a.target = '_blank'; a.rel = 'noopener';
+});
+// Menu mobile
+var menu = document.getElementById('menu'), openB = document.getElementById('menu-open');
+function setMenu(o){ menu.classList.toggle('open', o); menu.setAttribute('aria-hidden', !o); openB.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; if(o) menu.querySelector('a').focus(); else openB.focus(); }
+openB.addEventListener('click', function(){ setMenu(true); });
+document.getElementById('menu-close').addEventListener('click', function(){ setMenu(false); });
+menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.classList.contains('open')) setMenu(false); });
+// Slideshow do hero
+(function(){
+  var fig=document.querySelector('.hero-photo'); if(!fig) return;
+  var slides=fig.querySelectorAll('.slide'), btns=fig.querySelectorAll('.slide-ctrl button'), cap=document.getElementById('slide-cap');
+  var i=0, timer=null, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(n){
+    slides[i].classList.remove('on'); btns[i].setAttribute('aria-current','false');
+    i=(n+slides.length)%slides.length;
+    slides[i].classList.add('on'); btns[i].setAttribute('aria-current','true');
+    // reinicia a barra de progresso
+    var bar=btns[i].querySelector('i'); bar.style.animation='none'; bar.offsetWidth; bar.style.animation='';
+    cap.textContent=slides[i].dataset.cap;
+  }
+  function play(){ if(still) return; clearInterval(timer); timer=setInterval(function(){ show(i+1); },6000); }
+  btns.forEach(function(b,n){ b.addEventListener('click',function(){ show(n); play(); }); });
+  fig.addEventListener('mouseenter',function(){ clearInterval(timer); fig.classList.add('paused'); });
+  fig.addEventListener('mouseleave',function(){ fig.classList.remove('paused'); play(); });
+  fig.addEventListener('focusin',function(){ clearInterval(timer); fig.classList.add('paused'); });
+  if(still) fig.classList.add('paused');
+  play();
+})();
+// Abas de procedimentos
+var tabs = Array.prototype.slice.call(document.querySelectorAll('[role=tab]'));
+function select(t){
+  tabs.forEach(function(x){ var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+}
+tabs.forEach(function(t, i){
+  t.addEventListener('click', function(){ select(t); });
+  t.addEventListener('keydown', function(e){
+    var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if(d){ var n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus(); e.preventDefault(); }
+  });
+});
+</script>
+</body>
+</html>
