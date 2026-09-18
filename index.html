@@ -92,14 +92,35 @@ p{margin:0}
 .units li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--navy);opacity:.35}
 .units li.main::before{opacity:1;background:var(--carmim)}
 .units small{font-family:var(--mono);font-size:11px;color:var(--soft);margin-left:auto}
-.hero-photo{order:3;position:relative;height:280px;overflow:hidden;border-top:1px solid var(--line)}
-@media(min-width:640px){.hero-photo{height:380px}}
-@media(min-width:1024px){.hero-photo{grid-column:4;grid-row:1;height:auto;min-height:52vh;border-top:0;border-left:1px solid var(--line);overflow:visible}}
-.hero-photo .ph{position:absolute;inset:0;overflow:hidden}
-.hero-photo img{width:100%;height:100%;object-fit:cover}
-.hero-photo figcaption{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border:1px solid var(--line);padding:8px 12px;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grafite);z-index:2}
-.hero-card{order:4;position:relative;padding:28px 24px 36px}
-@media(min-width:1024px){.hero-card{grid-column:4;grid-row:2;border-left:1px solid var(--line);border-top:1px solid var(--line);padding:28px 32px 36px}}
+/* hero com vídeo de fundo */
+.hero{isolation:isolate;overflow:hidden}
+.hero-video{order:2;position:relative;width:100%;min-width:0;aspect-ratio:16/9;background:#EEF0F4;overflow:hidden}
+.hero-video video{width:100%;height:100%;object-fit:cover;display:block}
+@media(min-width:1024px){
+  .hero-video{position:absolute;inset:0;aspect-ratio:auto;z-index:-1;order:0}
+  .hero-video video{position:absolute;top:0;left:20%;width:118%;height:100%;object-position:50% 0}
+  .hero-video::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.96) 44%,rgba(255,255,255,.7) 57%,rgba(255,255,255,0) 72%)}
+  .hero .gl{z-index:1}
+  .hero-side,.hero-main{z-index:2}
+}
+.hero-side{order:3}
+.vid-toggle{position:absolute;right:16px;bottom:16px;z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(7,9,64,.55);backdrop-filter:blur(6px);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out)}
+.vid-toggle:hover{background:rgba(7,9,64,.8)}
+.vid-toggle svg{width:16px;height:16px}
+.vid-toggle .i-play{display:none}
+.vid-toggle[aria-pressed="true"] .i-play{display:block}
+.vid-toggle[aria-pressed="true"] .i-pause{display:none}
+@media(min-width:1024px){.vid-toggle{right:96px;bottom:32px}}
+
+/* card da curva (na seção da sala) */
+.sala-top{display:grid;gap:40px;align-items:end;margin-bottom:56px}
+.sala-top .sec-head{margin-bottom:0}
+@media(min-width:1024px){.sala-top{grid-template-columns:7fr 5fr;gap:72px}}
+.curve-card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:28px 30px 30px;position:relative}
+.curve-card .marker{top:-3px;left:-3px}
+@supports (animation-timeline: view()){
+  .curve-card .curve .draw{animation:draw linear forwards!important;animation-timeline:view()!important;animation-range:entry 30% cover 45%!important}
+}
 
 /* signature: pressure curve */
 .curve-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
@@ -293,19 +314,6 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
 
 
 /* ===== v2: imagens + movimento ===== */
-/* hero slideshow */
-.hero-photo .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--ease-inout)}
-.hero-photo .slide.on{opacity:1}
-.hero-photo .slide img{scale:1.08;transition:scale 7s linear}
-.hero-photo .slide.on img{scale:1}
-.hero-photo figcaption{transition:opacity var(--dur-base) var(--ease-out);max-width:calc(100% - 160px)}
-.slide-ctrl{position:absolute;right:16px;bottom:16px;z-index:3;display:flex;gap:6px;padding:4px 8px;border-radius:3px;background:rgba(7,9,64,.55);backdrop-filter:blur(6px)}
-.slide-ctrl button{width:34px;height:22px;padding:0;border:0;background:none;cursor:pointer;display:grid;align-items:center}
-.slide-ctrl button span{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.55);overflow:hidden}
-.slide-ctrl button span i{display:block;height:100%;width:100%;background:#fff;transform-origin:left;scale:0 1}
-.slide-ctrl button[aria-current="true"] span i{animation:bar 6s linear forwards}
-.hero-photo.paused .slide-ctrl button[aria-current="true"] span i{animation-play-state:paused}
-@keyframes bar{to{scale:1 1}}
 
 /* monitor sweep na curva */
 .curve{position:relative;overflow:hidden}
@@ -450,22 +458,33 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
     </div>
   </div>
 
-  <figure class="hero-photo fd d1" style="margin:0">
-    <span class="marker" style="top:-3px;left:-3px" aria-hidden="true"></span>
-    <div class="ph">
-      <div class="slide on" data-cap="Sala híbrida · Mater Dei Contorno"><img src="assets/sala-hibrida.webp" alt="Sala híbrida de hemodinâmica do Hospital Mater Dei Contorno, com angiógrafo, mesa cirúrgica e monitores" width="1800" height="1198" fetchpriority="high"></div>
-      <div class="slide" data-cap="Dr. Lucas Lodi na sala híbrida"><img src="assets/equipe-sala.webp" alt="Dr. Lucas Lodi Junqueira, de jaleco, na sala híbrida" width="1600" height="470" loading="lazy" style="object-position:50% 40%"></div>
-      <div class="slide" data-cap="Sala de comando · vista para a sala híbrida"><img src="assets/sala-comando.webp" alt="Sala de comando com monitores de angiografia e vista, pelo vidro, para a sala híbrida" width="1400" height="932" loading="lazy"></div>
-    </div>
-    <figcaption id="slide-cap" aria-live="polite">Sala híbrida · Mater Dei Contorno</figcaption>
-    <div class="slide-ctrl" role="group" aria-label="Fotos">
-      <button type="button" aria-label="Foto 1: sala híbrida" aria-current="true"><span><i></i></span></button>
-      <button type="button" aria-label="Foto 2: Dr. Lucas Lodi" aria-current="false"><span><i></i></span></button>
-      <button type="button" aria-label="Foto 3: sala de comando" aria-current="false"><span><i></i></span></button>
-    </div>
-  </figure>
+  <div class="hero-video" aria-hidden="false">
+    <video id="hero-vid" autoplay muted loop playsinline preload="auto" poster="assets/hero-coracao-poster.jpg" aria-label="Mulher sorrindo segurando um coração vermelho junto ao peito">
+      <source src="assets/hero-coracao.mp4" type="video/mp4">
+    </video>
+    <button type="button" class="vid-toggle" id="vid-toggle" aria-pressed="false" aria-label="Pausar vídeo">
+      <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 001.5.9l10-6.5a1 1 0 000-1.8l-10-6.5A1 1 0 008 5.5z"/></svg>
+    </button>
+  </div>
 
-  <div class="hero-card fd d3">
+</section>
+
+
+<div class="ticker" aria-label="Alguns dos procedimentos que fazemos">
+  <div class="ticker-track"><ul><li>Coronariografia</li><li>Angioplastia coronária</li><li>TAVI</li><li>FFR · iFR · RFR</li><li>IVUS e OCT</li><li>Valvoplastia por balão</li><li>Oclusão de CIA e forame oval</li><li>Oclusão do apêndice atrial</li><li>Valve-in-valve mitral</li><li>Aterectomia rotacional</li><li>Angioplastia periférica</li><li>Endoprótese para aneurismas</li><li>Biópsia endomiocárdica</li><li>Embolização de mioma</li><li>Embolização de próstata</li></ul><ul aria-hidden="true"><li>Coronariografia</li><li>Angioplastia coronária</li><li>TAVI</li><li>FFR · iFR · RFR</li><li>IVUS e OCT</li><li>Valvoplastia por balão</li><li>Oclusão de CIA e forame oval</li><li>Oclusão do apêndice atrial</li><li>Valve-in-valve mitral</li><li>Aterectomia rotacional</li><li>Angioplastia periférica</li><li>Endoprótese para aneurismas</li><li>Biópsia endomiocárdica</li><li>Embolização de mioma</li><li>Embolização de próstata</li></ul></div>
+</div>
+
+<!-- SALA HÍBRIDA -->
+<section class="sec bt" id="sala">
+  <div class="wrap">
+    <div class="sala-top">
+    <div class="sec-head sr">
+      <span class="label">Estrutura</span>
+      <h2>Hemodinâmica e centro cirúrgico <span class="dim">na mesma sala.</span></h2>
+      <p>Os exames no Mater Dei Contorno são feitos na sala híbrida. Ela tem o equipamento de hemodinâmica e a estrutura de um centro cirúrgico. Se o procedimento precisar virar cirurgia, o paciente continua ali, sem transferência.</p>
+    </div>
+  <div class="curve-card sr">
     <span class="marker" style="top:-3px;left:-3px" aria-hidden="true"></span>
     <div class="curve-head">
       <h2>Pressão medida por dentro da artéria</h2>
@@ -482,20 +501,6 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
     </div>
     <p class="curve-note">A diferença entre as duas curvas diz se a obstrução prejudica o fluxo de sangue. É isso que decide, no mesmo exame, se o stent é necessário.</p>
   </div>
-</section>
-
-
-<div class="ticker" aria-label="Alguns dos procedimentos que fazemos">
-  <div class="ticker-track"><ul><li>Coronariografia</li><li>Angioplastia coronária</li><li>TAVI</li><li>FFR · iFR · RFR</li><li>IVUS e OCT</li><li>Valvoplastia por balão</li><li>Oclusão de CIA e forame oval</li><li>Oclusão do apêndice atrial</li><li>Valve-in-valve mitral</li><li>Aterectomia rotacional</li><li>Angioplastia periférica</li><li>Endoprótese para aneurismas</li><li>Biópsia endomiocárdica</li><li>Embolização de mioma</li><li>Embolização de próstata</li></ul><ul aria-hidden="true"><li>Coronariografia</li><li>Angioplastia coronária</li><li>TAVI</li><li>FFR · iFR · RFR</li><li>IVUS e OCT</li><li>Valvoplastia por balão</li><li>Oclusão de CIA e forame oval</li><li>Oclusão do apêndice atrial</li><li>Valve-in-valve mitral</li><li>Aterectomia rotacional</li><li>Angioplastia periférica</li><li>Endoprótese para aneurismas</li><li>Biópsia endomiocárdica</li><li>Embolização de mioma</li><li>Embolização de próstata</li></ul></div>
-</div>
-
-<!-- SALA HÍBRIDA -->
-<section class="sec bt" id="sala">
-  <div class="wrap">
-    <div class="sec-head sr">
-      <span class="label">Estrutura</span>
-      <h2>Hemodinâmica e centro cirúrgico <span class="dim">na mesma sala.</span></h2>
-      <p>Os exames no Mater Dei Contorno são feitos na sala híbrida. Ela tem o equipamento de hemodinâmica e a estrutura de um centro cirúrgico. Se o procedimento precisar virar cirurgia, o paciente continua ali, sem transferência.</p>
     </div>
 
     <div class="facts sr">
@@ -517,8 +522,8 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
           <div><h3>Pelo punho, sempre que possível</h3><p>Preferimos a via radial, no punho, porque o risco de sangramento é menor do que pela virilha.</p></div></li>
       </ul>
       <figure class="sala-fig sr" style="margin:0">
-        <img src="assets/sala-comando.webp" alt="Sala de comando com monitores de angiografia e vista, pelo vidro, para a sala híbrida" width="1400" height="932" loading="lazy">
-        <figcaption>Sala de comando. Pelo vidro, a sala híbrida do Mater Dei Contorno.</figcaption>
+        <img src="assets/sala-hibrida.webp" alt="Sala híbrida de hemodinâmica do Hospital Mater Dei Contorno, com angiógrafo, mesa cirúrgica e monitores" width="1800" height="1198" loading="lazy">
+        <figcaption>Sala híbrida do Mater Dei Contorno.</figcaption>
       </figure>
     </div>
   </div>
@@ -824,26 +829,12 @@ openB.addEventListener('click', function(){ setMenu(true); });
 document.getElementById('menu-close').addEventListener('click', function(){ setMenu(false); });
 menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.classList.contains('open')) setMenu(false); });
-// Slideshow do hero
+// Vídeo do hero: pausa por preferência de movimento reduzido e botão de pausa
 (function(){
-  var fig=document.querySelector('.hero-photo'); if(!fig) return;
-  var slides=fig.querySelectorAll('.slide'), btns=fig.querySelectorAll('.slide-ctrl button'), cap=document.getElementById('slide-cap');
-  var i=0, timer=null, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function show(n){
-    slides[i].classList.remove('on'); btns[i].setAttribute('aria-current','false');
-    i=(n+slides.length)%slides.length;
-    slides[i].classList.add('on'); btns[i].setAttribute('aria-current','true');
-    // reinicia a barra de progresso
-    var bar=btns[i].querySelector('i'); bar.style.animation='none'; bar.offsetWidth; bar.style.animation='';
-    cap.textContent=slides[i].dataset.cap;
-  }
-  function play(){ if(still) return; clearInterval(timer); timer=setInterval(function(){ show(i+1); },6000); }
-  btns.forEach(function(b,n){ b.addEventListener('click',function(){ show(n); play(); }); });
-  fig.addEventListener('mouseenter',function(){ clearInterval(timer); fig.classList.add('paused'); });
-  fig.addEventListener('mouseleave',function(){ fig.classList.remove('paused'); play(); });
-  fig.addEventListener('focusin',function(){ clearInterval(timer); fig.classList.add('paused'); });
-  if(still) fig.classList.add('paused');
-  play();
+  var v=document.getElementById('hero-vid'), b=document.getElementById('vid-toggle'); if(!v) return;
+  function set(paused){ if(paused){ v.pause(); } else { var p=v.play(); if(p&&p.catch) p.catch(function(){}); } b.setAttribute('aria-pressed',paused); b.setAttribute('aria-label',paused?'Tocar vídeo':'Pausar vídeo'); }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ v.removeAttribute('autoplay'); set(true); }
+  b.addEventListener('click',function(){ set(!v.paused); });
 })();
 // Abas de procedimentos
 var tabs = Array.prototype.slice.call(document.querySelectorAll('[role=tab]'));
