@@ -95,7 +95,7 @@ p{margin:0}
 .hero{position:relative;display:flex;flex-direction:column}
 @media(min-width:1024px){.hero{display:grid;grid-template-columns:var(--gx-1) 22% 38% 28% var(--gx-1);grid-template-rows:auto auto;min-height:calc(100vh - 92px);min-height:calc(100svh - 92px)}}
 .hero-main{order:1;padding:56px 24px 40px;position:relative;z-index:2}
-@media(min-width:1024px){.hero-main{grid-column:3;grid-row:1 / span 2;padding:8vh 44px 48px;display:flex;flex-direction:column;justify-content:center}}
+@media(min-width:1024px){.hero-main{grid-column:2 / span 2;grid-row:1 / span 2;padding:8vh 44px 48px 0;display:flex;flex-direction:column;justify-content:center}}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px}
 .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--carmim)}
 .hero h1{font-size:clamp(42px,5.3vw,96px);line-height:.98;letter-spacing:-.04em}
@@ -103,15 +103,6 @@ p{margin:0}
 .hero h1 .l2{color:var(--soft);font-weight:500;padding-left:.45em}
 .hero h1 .l3{color:var(--carmim)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
-.hero-side{order:2;padding:32px 24px;border-top:1px solid var(--line);background:var(--mist);position:relative}
-@media(min-width:1024px){.hero-side{grid-column:2;grid-row:1 / span 2;background:none;border-top:0;border-right:1px solid var(--line);padding:8vh 32px 40px 0;display:flex;flex-direction:column;justify-content:space-between}}
-.hero-side p{color:var(--muted);font-size:16px;max-width:420px}
-.units{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);position:relative}
-.units ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
-.units li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--grafite)}
-.units li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--navy);opacity:.35}
-.units li.main::before{opacity:1;background:var(--carmim)}
-.units small{font-family:var(--mono);font-size:11px;color:var(--soft);margin-left:auto}
 /* hero com vídeo de fundo */
 .hero{isolation:isolate;overflow:hidden}
 .hero-video{order:2;position:relative;width:100%;min-width:0;aspect-ratio:16/9;background:#EEF0F4;overflow:hidden}
@@ -121,9 +112,7 @@ p{margin:0}
   .hero-video video{position:absolute;top:0;left:20%;width:118%;height:100%;object-position:50% 0}
   .hero-video::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.96) 44%,rgba(255,255,255,.7) 57%,rgba(255,255,255,0) 72%)}
   .hero .gl{z-index:1}
-  .hero-side,.hero-main{z-index:2}
 }
-.hero-side{order:3}
 .vid-toggle{position:absolute;right:16px;bottom:16px;z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(7,9,64,.55);backdrop-filter:blur(6px);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background-color var(--dur-quick) var(--ease-out)}
 .vid-toggle:hover{background:rgba(7,9,64,.8)}
 .vid-toggle svg{width:16px;height:16px}
@@ -408,7 +397,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
 /* ===== v3: ajustes mobile, contraste, toque ===== */
 :root{--soft:#8A8E9B}
 .sala-fig img{height:auto}
-.card .tag,.doc .crm,.units small,.f-bottom{color:var(--muted)}
+.card .tag,.doc .crm,.f-bottom{color:var(--muted)}
 .vid-toggle{width:44px;height:44px}
 .tab{padding:15px 18px}
 .f-grid ul{gap:0}
@@ -418,7 +407,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
 .mobile-menu .menu-brand{position:absolute;top:18px;left:24px;display:flex;align-items:center;gap:10px;border:0;padding:0}
 .mobile-menu .menu-brand img:first-child{height:40px;width:auto}.mobile-menu .menu-brand img:last-child{height:30px;width:auto}
 /* hero mobile */
-.hero-lead{display:none}
+.hero-lead{display:block;margin-top:28px;font-size:18px;line-height:1.55;color:var(--grafite);max-width:40ch}
 @media(max-width:1023px){
   .hero-main{padding:44px 20px 28px}
   .hero-eyebrow{margin-bottom:18px}
@@ -428,13 +417,6 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
   .hero-cta .btn{width:100%;justify-content:center;padding:18px 22px}
   .hero-video{aspect-ratio:1/1}
   .hero-video video{object-position:50% 20%}
-  .hero-side{padding:22px 20px}
-  .hero-side>p{display:none}
-  .units{margin-top:0;padding-top:0;border-top:0}
-  .units .marker{display:none}
-  .units ul{grid-template-columns:1fr 1fr;gap:10px 16px}
-  .units li{font-size:13px}
-  .units small{display:none}
 }
 /* carrosséis no celular */
 @media(max-width:899px){
@@ -745,7 +727,7 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
 <main id="conteudo">
 <!-- HERO -->
 <section class="hero">
-  <div class="gl" aria-hidden="true"><i style="left:var(--gx-1)"></i><i style="left:var(--gx-2)"></i><i style="left:var(--gx-3)"></i><i style="left:var(--gx-4)"></i></div>
+  <div class="gl" aria-hidden="true"><i style="left:var(--gx-1)"></i><i style="left:var(--gx-3)"></i><i style="left:var(--gx-4)"></i></div>
 
   <div class="hero-main">
     <div class="hero-eyebrow label rv"><span class="dot"></span>Hemodinâmica · Rede Mater Dei</div>
@@ -760,20 +742,6 @@ footer.site{background:var(--mist);border-top:1px solid var(--line);padding:80px
       <a class="btn btn-red" data-wa="paciente" href="https://wa.me/5531971364667">Falar com a equipe
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-line" href="#medicos">Sou médico e quero encaminhar</a>
-    </div>
-  </div>
-
-  <div class="hero-side">
-    <p class="fd d2">Somos a equipe que faz cateterismo, angioplastia, TAVI e outros procedimentos por cateter nos hospitais Mater Dei de Belo Horizonte, Nova Lima e Betim-Contagem. Desde 2014.</p>
-    <div class="units fd d3">
-      <span class="marker" style="top:-3px;left:-3px" aria-hidden="true"></span>
-      <span class="label">Onde atendemos</span>
-      <ul>
-        <li class="main">Mater Dei Contorno <small>2014</small></li>
-        <li>Mater Dei Betim-Contagem <small>2019</small></li>
-        <li>Mater Dei Santo Agostinho <small>2022</small></li>
-        <li>Mater Dei Nova Lima <small>2024</small></li>
-      </ul>
     </div>
   </div>
 
